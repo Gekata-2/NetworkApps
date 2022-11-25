@@ -20,6 +20,8 @@ public interface IBoard extends Remote {
 
     int getTurn() throws RemoteException;
 
+    int getTotalScore() throws RemoteException;
+
     void setSticks(int[][] s) throws RemoteException;
 
     void setSquares(int[][] s) throws RemoteException;
@@ -48,7 +50,7 @@ public interface IBoard extends Remote {
 
     boolean checkSquareDown(int x, int y) throws RemoteException;
 
-    void checkSquare(int x, int y) throws RemoteException;
+    boolean checkSquare(int x, int y) throws RemoteException;
 
     boolean checkWinner() throws RemoteException;
 

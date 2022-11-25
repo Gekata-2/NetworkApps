@@ -22,6 +22,7 @@ public class Client {
     public static List<String> allActions = Arrays.asList("add_r", "add_m", "add_mtor", "add_ftor", "del_m", "get_rbym", "get_fbyr", "print", "print_m", "hint", "exit");
 
     private static Scanner scanner;
+    private static String actions = "Enter action (add_r,add_m,add_mtor,add_ftor,del_m,get_rbym,get_fbyr,print,print_m,hint,exit): ";
 
     public static void PrintRecords(List<Record> records) {
         System.out.println("--------------------");
@@ -133,11 +134,11 @@ public class Client {
     }
 
     private static String GetAction() {
-        System.out.print("Enter action (add_r,add_m,add_mtor,add_ftor,del_m,get_rbym,get_fbyr,print,print_m,hint,exit): ");
+        System.out.print(actions);
         String action = scanner.nextLine();
         while (!allActions.contains(action.toLowerCase())) {
             System.out.println("Incorrect action. Please enter action again");
-            System.out.println("Enter action (add_r): ");
+            System.out.print(actions);
             action = scanner.nextLine();
         }
         return action;
@@ -300,12 +301,4 @@ public class Client {
 
     }
 }
-
-//        PrintRecords(server.getAllRecords());
-//        AddFileToRecord(0, "test img.png");
-//        AddFileToRecord(1, "Dune.pdf");
-//        PrintRecords(server.getAllRecords());
-//
-//        GetFileFromRecord(0, "test img.png");
-//        GetFileFromRecord(1, "Dune.pdf");
 

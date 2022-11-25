@@ -70,10 +70,17 @@ public class Client {
         System.out.println("You is " + gameBoard.getName(id));
         System.out.println(" Turn: " + gameBoard.getName(gameBoard.getTurn()));
 
+        int prevScore = 0;
         while (gameBoard.getWinner() < 0) {
 
-            while (!gameBoard.isMyTurn(id)) {
+            while (!gameBoard.isMyTurn(id) && gameBoard.getWinner() < 0) {
                 Thread.sleep(10);
+                if (prevScore != gameBoard.getTotalScore()) {
+                    clearScreen();
+                    board.setBoard(gameBoard.getBoard());
+                    board.PrintBoard();
+                    prevScore = gameBoard.getTotalScore();
+                }
             }
             if (gameBoard.getWinner() >= 0)
                 break;
@@ -102,6 +109,7 @@ public class Client {
             board.PrintBoard();
             System.out.println("You is " + gameBoard.getName(id));
             System.out.println("Turn: " + gameBoard.getName(gameBoard.getTurn()));
+            prevScore = gameBoard.getTotalScore();
         }
 
         clearScreen();

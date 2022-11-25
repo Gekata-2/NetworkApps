@@ -225,46 +225,76 @@ public class Board implements IBoard {
     }
 
     @Override
-    public void checkSquare(int x, int y) throws RemoteException {
+    public boolean checkSquare(int x, int y) throws RemoteException {
+        boolean isSquareBuilt = false;
         if (x % 2 == 0) {
             if (x == 0) {
-                if (checkSquareDown(x, y))
+                if (checkSquareDown(x, y)) {
                     squares[x][y] = turn;
+                    isSquareBuilt = true;
+                }
 
             } else if (x == sticks.length - 1) {
-                if (checkSquareUpper(x, y))
+                if (checkSquareUpper(x, y)) {
                     squares[x - 3][y] = turn;
+                    isSquareBuilt = true;
+                }
 
             } else {
-                if (checkSquareDown(x, y))
+                if (checkSquareDown(x, y)) {
                     squares[x - 1][y] = turn;
+                    isSquareBuilt = true;
+                }
 
-                if (checkSquareUpper(x, y))
+                if (checkSquareUpper(x, y)) {
                     squares[x - 2][y] = turn;
+                    isSquareBuilt = true;
+                }
 
             }
         } else {
             int xq = (int) (x - 1) / 2;
             if (y == 0) {
-                if (checkSquareRight(x, y))
+                if (checkSquareRight(x, y)) {
                     squares[xq][y] = turn;
+                    isSquareBuilt = true;
+                }
 
             } else if (y == sticks[x].length - 1) {
-                if (checkSquareLeft(x, y))
+                if (checkSquareLeft(x, y)) {
                     squares[xq][y - 1] = turn;
+                    isSquareBuilt = true;
+                }
 
             } else {
-                if (checkSquareRight(x, y))
+                if (checkSquareRight(x, y)) {
                     squares[xq][y] = turn;
+                    isSquareBuilt = true;
+                }
 
-                if (checkSquareLeft(x, y))
+                if (checkSquareLeft(x, y)) {
                     squares[xq][y - 1] = turn;
+                    isSquareBuilt = true;
+                }
 
             }
         }
         FillInBoard();
         Print();
         PrintSquares();
+        return isSquareBuilt;
+    }
+
+    @Override
+    public int getTotalScore() throws RemoteException {
+        int score = 0;
+        for (int i = 0; i < squares.length; i++) {
+            for (int j = 0; j < squares[i].length; j++) {
+                if (squares[i][j] == P1 || squares[i][j] == P2)
+                    score++;
+            }
+        }
+        return score;
     }
 
     @Override
@@ -274,9 +304,11 @@ public class Board implements IBoard {
                 if (sticks[x][y] == 0) {
                     sticks[x][y] = 1;
 
-                    checkSquare(x, y);
-                    changeTurn();
-                    checkWinner();
+                    if (checkSquare(x, y) == false) {// если квадрат не построен
+                        changeTurn(); // меняем ход
+                    } else { // если квадат построен, то проверяем победителся
+                        checkWinner();
+                    }
                     FillInBoard();
 
                     return true;
