@@ -8,6 +8,6 @@ public class Main {
         server.InitTestRecords();
         server.PrintAllRecords();
         Endpoint.publish("http://localhost:8080/Server", server);
-        System.out.println("org.example.Server is running!");
+        System.out.println("Server is running!");
     }
 }

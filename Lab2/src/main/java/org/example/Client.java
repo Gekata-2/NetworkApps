@@ -189,7 +189,6 @@ public class Client {
     }
 
     private static void PrintHint() {
-// "add_r", "add_m", "add_mtor", "add_ftor", "del_m", "get_rbym", "get_fbyr", "print", "print_m", "exit"
         System.out.println("--------------------------------------------");
         System.out.println("|>Possible actions (case doesn't matter):  |");
         System.out.println("" +

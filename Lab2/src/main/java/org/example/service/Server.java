@@ -27,12 +27,30 @@ public interface Server {
 
     /**
      * 
+     * @return
+     *     returns java.util.List<org.example.service.Mark>
      */
-    @WebMethod(operationName = "InitTestRecords")
-    @RequestWrapper(localName = "InitTestRecords", targetNamespace = "http://example.org/", className = "org.example.service.InitTestRecords")
-    @ResponseWrapper(localName = "InitTestRecordsResponse", targetNamespace = "http://example.org/", className = "org.example.service.InitTestRecordsResponse")
-    @Action(input = "http://example.org/Server/InitTestRecordsRequest", output = "http://example.org/Server/InitTestRecordsResponse")
-    public void initTestRecords();
+    @WebMethod(operationName = "GetAllMarks")
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "GetAllMarks", targetNamespace = "http://example.org/", className = "org.example.service.GetAllMarks")
+    @ResponseWrapper(localName = "GetAllMarksResponse", targetNamespace = "http://example.org/", className = "org.example.service.GetAllMarksResponse")
+    @Action(input = "http://example.org/Server/GetAllMarksRequest", output = "http://example.org/Server/GetAllMarksResponse")
+    public List<Mark> getAllMarks();
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns java.util.List<org.example.service.Record>
+     */
+    @WebMethod(operationName = "GetRecordsByMark")
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "GetRecordsByMark", targetNamespace = "http://example.org/", className = "org.example.service.GetRecordsByMark")
+    @ResponseWrapper(localName = "GetRecordsByMarkResponse", targetNamespace = "http://example.org/", className = "org.example.service.GetRecordsByMarkResponse")
+    @Action(input = "http://example.org/Server/GetRecordsByMarkRequest", output = "http://example.org/Server/GetRecordsByMarkResponse")
+    public List<Record> getRecordsByMark(
+        @WebParam(name = "arg0", targetNamespace = "")
+        int arg0);
 
     /**
      * 
@@ -45,18 +63,12 @@ public interface Server {
 
     /**
      * 
-     * @param arg0
-     * @return
-     *     returns int
      */
-    @WebMethod(operationName = "AddMark")
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "AddMark", targetNamespace = "http://example.org/", className = "org.example.service.AddMark")
-    @ResponseWrapper(localName = "AddMarkResponse", targetNamespace = "http://example.org/", className = "org.example.service.AddMarkResponse")
-    @Action(input = "http://example.org/Server/AddMarkRequest", output = "http://example.org/Server/AddMarkResponse")
-    public int addMark(
-        @WebParam(name = "arg0", targetNamespace = "")
-        String arg0);
+    @WebMethod(operationName = "InitTestRecords")
+    @RequestWrapper(localName = "InitTestRecords", targetNamespace = "http://example.org/", className = "org.example.service.InitTestRecords")
+    @ResponseWrapper(localName = "InitTestRecordsResponse", targetNamespace = "http://example.org/", className = "org.example.service.InitTestRecordsResponse")
+    @Action(input = "http://example.org/Server/InitTestRecordsRequest", output = "http://example.org/Server/InitTestRecordsResponse")
+    public void initTestRecords();
 
     /**
      * 
@@ -120,36 +132,6 @@ public interface Server {
 
     /**
      * 
-     * @param arg0
-     * @return
-     *     returns java.util.List<org.example.service.Record>
-     */
-    @WebMethod(operationName = "GetRecordsByMark")
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "GetRecordsByMark", targetNamespace = "http://example.org/", className = "org.example.service.GetRecordsByMark")
-    @ResponseWrapper(localName = "GetRecordsByMarkResponse", targetNamespace = "http://example.org/", className = "org.example.service.GetRecordsByMarkResponse")
-    @Action(input = "http://example.org/Server/GetRecordsByMarkRequest", output = "http://example.org/Server/GetRecordsByMarkResponse")
-    public List<Record> getRecordsByMark(
-        @WebParam(name = "arg0", targetNamespace = "")
-        int arg0);
-
-    /**
-     * 
-     * @param arg1
-     * @param arg0
-     */
-    @WebMethod(operationName = "AddMarksToRecord")
-    @RequestWrapper(localName = "AddMarksToRecord", targetNamespace = "http://example.org/", className = "org.example.service.AddMarksToRecord")
-    @ResponseWrapper(localName = "AddMarksToRecordResponse", targetNamespace = "http://example.org/", className = "org.example.service.AddMarksToRecordResponse")
-    @Action(input = "http://example.org/Server/AddMarksToRecordRequest", output = "http://example.org/Server/AddMarksToRecordResponse")
-    public void addMarksToRecord(
-        @WebParam(name = "arg0", targetNamespace = "")
-        int arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        List<Integer> arg1);
-
-    /**
-     * 
      * @param arg1
      * @param arg0
      * @return
@@ -168,14 +150,32 @@ public interface Server {
 
     /**
      * 
+     * @param arg0
      * @return
-     *     returns java.util.List<org.example.service.Mark>
+     *     returns int
      */
-    @WebMethod(operationName = "GetAllMarks")
+    @WebMethod(operationName = "AddMark")
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "GetAllMarks", targetNamespace = "http://example.org/", className = "org.example.service.GetAllMarks")
-    @ResponseWrapper(localName = "GetAllMarksResponse", targetNamespace = "http://example.org/", className = "org.example.service.GetAllMarksResponse")
-    @Action(input = "http://example.org/Server/GetAllMarksRequest", output = "http://example.org/Server/GetAllMarksResponse")
-    public List<Mark> getAllMarks();
+    @RequestWrapper(localName = "AddMark", targetNamespace = "http://example.org/", className = "org.example.service.AddMark")
+    @ResponseWrapper(localName = "AddMarkResponse", targetNamespace = "http://example.org/", className = "org.example.service.AddMarkResponse")
+    @Action(input = "http://example.org/Server/AddMarkRequest", output = "http://example.org/Server/AddMarkResponse")
+    public int addMark(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0);
+
+    /**
+     * 
+     * @param arg1
+     * @param arg0
+     */
+    @WebMethod(operationName = "AddMarksToRecord")
+    @RequestWrapper(localName = "AddMarksToRecord", targetNamespace = "http://example.org/", className = "org.example.service.AddMarksToRecord")
+    @ResponseWrapper(localName = "AddMarksToRecordResponse", targetNamespace = "http://example.org/", className = "org.example.service.AddMarksToRecordResponse")
+    @Action(input = "http://example.org/Server/AddMarksToRecordRequest", output = "http://example.org/Server/AddMarksToRecordResponse")
+    public void addMarksToRecord(
+        @WebParam(name = "arg0", targetNamespace = "")
+        int arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        List<Integer> arg1);
 
 }
